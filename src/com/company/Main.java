@@ -14,7 +14,6 @@ public class Main {
         double clockOffset;
 
         try {
-            int i = 0;
             DatagramSocket socket = new DatagramSocket();
             SNTPMessage msg = new SNTPMessage();
             DatagramPacket packet = datagramPacket();
@@ -40,15 +39,14 @@ public class Main {
         }
 
     }
-
     static DatagramPacket datagramPacket() {
         DatagramPacket packet = null;
         for(String server : serverName) {
             try {
-                InetAddress adress = InetAddress.getByName(server);
+                InetAddress address = InetAddress.getByName(server);
                 SNTPMessage msg = new SNTPMessage();
                 byte[] buf = msg.toByteArray();
-                packet = new DatagramPacket(buf, buf.length, adress, port);
+                packet = new DatagramPacket(buf, buf.length, address, port);
                 System.out.println("Connected to " + server);
                 break;
             } catch(Exception e) {
